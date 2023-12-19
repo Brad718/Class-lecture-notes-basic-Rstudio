@@ -1,0 +1,115 @@
+##Import using scan##
+
+nile <- scan("nile.txt")
+nile
+
+typeof(nile)
+
+hist(nile)
+
+
+## Read the contents of nile as character
+nile_char <- scan("nile.txt", what = character())
+nile_char
+
+typeof(nile_char)
+
+
+##Read Sunset Salvo
+scan("sunset-salvo-sem", what = character(), sep = ";")
+
+## Read the cintents of running_dat.tsv
+scan("running_dat.tsv", what = list("", 1.0, 1.0, 1.0, 1.0, 1.0, 1.0), sep = "\t", skip = 1)
+
+## Export nile in a text file
+cat(nile, file = "nile1.txt", sep = ",")n ile
+
+## Read running_dat.tsv conveniently
+## Tab-separated
+running <- read.table("running_dat.tsv", header = TRUE, sep = "\t")
+running
+
+str(running)
+
+## Comma-separated
+read.table("running_dat.csv", header = TRUE, sep = ",")
+read.csv("running_dat.csv")
+
+## semi-colon-separated files
+read.csv2("sunset-salvo-sem", header = FALSE)
+
+read.csv2("sunset-salvo-sem")
+
+
+## Export tabular data
+
+write.table(running, file = "running.dat", sep = "&&", dec = "*")
+
+readLines("running.dat")
+
+
+## XML: Import
+library("xml2")
+stats_people <- read_xml("statisticians.xml")
+stats_people
+
+
+## Extract the tag name of stats_people
+xml_name(stats_people)
+
+## Extract the children of stats_people
+xml_children(stats_people)
+
+
+## Extract surnames using XPath
+surname_nodes <- xml_find_all(stats_people, ".//surname")
+surname_nodes
+
+
+xml_text(surname_nodes)
+
+
+## Stats people in tabular form
+library("XML")
+stats_people_df <- xmlToDataFrame("statisticians.xml")
+stats_people_df
+
+
+## Remove a record
+bayes_record <- xml_children(stats_people) [[4]]
+xml_remove(bayes_record)
+stats_people
+
+
+## Write new XML
+write_xml(stats_people, "statisticians_no_bayes.xml")
+
+readLines("statisticians_no_bayes.xml")
+
+##Read JSON
+
+library("jsonlite")
+stats_people <- fromJSON("statisticians.json")
+stats_people
+
+running_json <- toJSON(running)
+running_json
+
+prettify(running_json)
+
+write_json(running, "running.json", pretty = TRUE)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
